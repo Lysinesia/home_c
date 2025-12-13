@@ -1,0 +1,14 @@
+MakeFile
+all: prog
+
+prog: main.o sensor.o
+	gcc prog -o main.o sensor.o
+
+main.o: main.c sensor.h
+	gcc -c main.c -o main.o
+
+temp_api.o: sensor.c sensor.h
+	gcc -c sensor.c -o sensor.o
+
+clean:
+	rm -rf *.0 prog
