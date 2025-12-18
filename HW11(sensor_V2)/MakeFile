@@ -1,0 +1,10 @@
+makefile
+
+sensor_app: main.c sensor.c csv_parser.c sensor.h csv_parser.h
+	gcc -Wall -o sensor_app main.c sensor.c csv_parser.c
+
+clean:
+	del sensor_app.exe
+
+run:
+	sensor_app -h
