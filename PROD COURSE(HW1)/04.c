@@ -1,0 +1,16 @@
+#include <stdio.h>
+#include <stdint.h>
+
+int main()
+{
+    unsigned int N;
+    unsigned int K;
+    scanf("%u %u", &N, &K);
+    unsigned int result;
+    
+    result = (N << (32 - K)) >> (32 - K);
+    
+    printf("%u\n", result);
+    
+    return 0;
+}
