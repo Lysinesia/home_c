@@ -1,0 +1,29 @@
+
+{% extends 'base.html' %}
+{% load core_extras %}
+{% block title %}Календарь{% endblock %}
+
+{% block content %}
+<h1>📅 Календарь задач</h1>
+
+<div class="calendar-grid">
+    {% for day in days %}
+        <div class="day-box {% if day == today %}today{% endif %}">
+            <div class="day-date">
+                {{ day|date:"d.m" }}
+            </div>
+
+            <div class="tasks">
+                {% for task in tasks_by_day|get_item:day %}
+                    <div class="task">
+                        {{ task.title }}
+                    </div>
+                {% empty %}
+                    <div class="no-task">—</div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endfor %}
+</div>
+{% include 'back_button.html' %}
+{% endblock %}

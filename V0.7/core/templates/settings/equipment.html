@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block title %}Оборудование{% endblock %}
+
+{% block content %}
+<h1>🛠 Оборудование</h1>
+
+<a href="{% url 'equipment_add' %}" class="btn">＋ Добавить</a>
+
+<table class="neon-table">
+    <tr>
+        <th>Название</th>
+        <th>Локация</th>
+        <th>Статус</th>
+        <th>Действия</th>
+    </tr>
+
+    {% for eq in equipment %}
+    <tr>
+        <td>{{ eq.name }}</td>
+        <td>{{ eq.location|default:"—" }}</td>
+        <td>
+            {% if eq.is_active %}
+                <span class="ok">Активно</span>
+            {% else %}
+                <span class="bad">Отключено</span>
+            {% endif %}
+        </td>
+        <td>
+            <a href="{% url 'equipment_edit' eq.id %}" class="btn">✏</a>
+            <a href="{% url 'equipment_delete' eq.id %}" class="btn bad">🗑</a>
+        </td>
+    </tr>
+    {% empty %}
+    <tr><td colspan="4">Оборудование не добавлено</td></tr>
+    {% endfor %}
+</table>
+
+{% include 'back_button.html' %}
+{% endblock %}
+

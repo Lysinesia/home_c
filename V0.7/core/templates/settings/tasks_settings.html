@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block title %}Настройка задач{% endblock %}
+
+{% block content %}
+<h1>📋 Настройка задач</h1>
+
+<div class="card">
+    <form method="post">
+        {% csrf_token %}
+
+        <input type="text" name="title" placeholder="Название задачи" required>
+
+        <select name="equipment" required>
+            <option value="">Оборудование</option>
+            {% for eq in equipment %}
+                <option value="{{ eq.id }}">{{ eq.name }}</option>
+            {% endfor %}
+        </select>
+
+        <input type="datetime-local" name="due_date" required>
+
+        <button class="btn">➕ Добавить задачу</button>
+    </form>
+</div>
+
+<hr>
+
+{% for task in tasks %}
+    <div class="task-card">
+        <h3>{{ task.title }}</h3>
+        <p>🛠 {{ task.equipment.name }}</p>
+        <p>⏰ {{ task.due_date|date:"d.m.Y H:i" }}</p>
+        <p>📌 {{ task.get_status_display }}</p>
+    </div>
+{% empty %}
+    <p>Задач нет</p>
+{% endfor %}
+
+{% include 'back_button.html' %}
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block title %}Оборудование{% endblock %}
+
+{% block content %}
+<h1>🛠 {% if equipment %}Редактирование{% else %}Добавление{% endif %}</h1>
+
+<form method="post">
+    {% csrf_token %}
+
+    <label>Название</label><br>
+    <input type="text" name="name" value="{{ equipment.name|default:'' }}" required><br><br>
+
+    <label>Локация</label><br>
+    <input type="text" name="location" value="{{ equipment.location|default:'' }}"><br><br>
+
+    {% if equipment %}
+        <label>
+            <input type="checkbox" name="is_active" {% if equipment.is_active %}checked{% endif %}>
+            Активно
+        </label><br><br>
+    {% endif %}
+
+    <button class="btn">Сохранить</button>
+</form>
+
+<a href="{% url 'equipment' %}" class="btn back-btn">← Назад</a>
+{% include 'back_button.html' %}
+{% endblock %}

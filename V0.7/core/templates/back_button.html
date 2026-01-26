@@ -1,0 +1,34 @@
+<style>
+.back-btn {
+    position: fixed;
+    bottom: 30px;
+    padding: 14px 22px;
+    border-radius: 50px;
+    background: linear-gradient(45deg, #ff00ff, #00fff7);
+    color: black;
+    font-weight: bold;
+    box-shadow: 0 0 25px #00fff7;
+    cursor: pointer;
+    z-index: 1000;
+    border: none;
+    text-decoration: none;
+}
+
+/* Назад — левее */
+.back-btn.back {
+    right: 200px;
+}
+
+/* На главную — правее */
+.back-btn.home {
+    right: 30px;
+}
+</style>
+
+<button class="back-btn back" onclick="history.back()">
+    ⬅ Назад
+</button>
+
+<a href="{% url 'dashboard' %}" class="back-btn home">
+    🏠 На главную
+</a>

@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}История{% endblock %}
+
+{% block content %}
+<h1>📜 История задач</h1>
+
+{% for task in tasks %}
+    <div class="task-card">
+        <b>{{ task.title }}</b><br>
+
+        {% if task.status == 'completed' %}
+            <span style="color:#00ff99">✔ Выполнено</span>
+        {% else %}
+            <span style="color:#ffaa00">⏳ В процессе</span>
+        {% endif %}
+
+        <br>
+        📅 {{ task.due_date|date:"d.m.Y H:i" }}
+    </div>
+{% empty %}
+    <p>Нет задач</p>
+{% endfor %}
+{% include 'back_button.html' %}
+{% endblock %}
+
+

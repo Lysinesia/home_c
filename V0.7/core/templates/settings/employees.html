@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% block title %}Сотрудники{% endblock %}
+
+{% block content %}
+<div class="card">
+    <h3>➕ Добавить сотрудника</h3>
+
+    <form method="post">
+        {% csrf_token %}
+
+        <input type="text" name="username" placeholder="Логин" required>
+        <input type="password" name="password" placeholder="Пароль" required>
+
+        <select name="group">
+            <option value="">Роль</option>
+            {% for group in groups %}
+                <option value="{{ group.id }}">{{ group.name }}</option>
+            {% endfor %}
+        </select>
+
+        <button class="btn">Создать</button>
+    </form>
+</div>
+<h1>👥 Сотрудники</h1>
+
+<table class="neon-table">
+    <tr>
+        <th>Пользователь</th>
+        <th>Статус</th>
+        <th>Роль</th>
+        <th>Действия</th>
+    </tr>
+
+    {% for user in users %}
+    <tr>
+        <td>{{ user.username }}</td>
+
+        <td>
+            {% if user.is_active %}
+                <span class="ok">Активен</span>
+            {% else %}
+                <span class="bad">Отключён</span>
+            {% endif %}
+        </td>
+
+        <td>
+    {% if user.is_superuser %}
+        <span class="role admin">Администратор</span>
+    {% elif user.groups.all %}
+        {% for group in user.groups.all %}
+            <span class="role group">{{ group.name }}</span>
+        {% endfor %}
+    {% elif user.is_staff %}
+        <span class="role staff">Персонал</span>
+    {% else %}
+        <span class="role user">Пользователь</span>
+    {% endif %}
+        </td>
+
+        <td>
+            {% if not user.is_superuser %}
+                <a href="{% url 'toggle_active' user.id %}" class="btn">
+                    {% if user.is_active %}Отключить{% else %}Включить{% endif %}
+                </a>
+
+                <a href="{% url 'toggle_admin' user.id %}" class="btn">
+                    {% if user.is_staff %}Убрать админа{% else %}Сделать админом{% endif %}
+                </a>
+            {% endif %}
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% include 'back_button.html' %}
+{% endblock %}
+
+

@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% block title %}Задачи{% endblock %}
+
+{% block content %}
+<h1>⚡ Текущие задачи</h1>
+
+{% if tasks %}
+    {% for task in tasks %}
+        <div class="task-card {% if task.status == 'completed' %}task-done{% endif %}">
+            <h3>{{ task.title }}</h3>
+
+            <p>
+                🛠 <b>{{ task.equipment.name }}</b><br>
+                📍 {{ task.equipment.location }}
+            </p>
+
+            <p>
+                ⏰ Срок:
+                <b>{{ task.due_date|date:"d.m.Y H:i" }}</b>
+            </p>
+
+            {% if task.is_overdue %}
+                <p style="color:#ff0033;">⛔ Просрочено</p>
+            {% else %}
+                <p style="color:#00ff99;">✔ В срок</p>
+            {% endif %}
+
+            <form method="post" action="{% url 'complete_task' task.id %}">
+                {% csrf_token %}
+            {% if task.status == 'active' %}
+            <form method="post" action="{% url 'complete_task' task.id %}">
+                {% csrf_token %}
+            <button class="btn">✔ Выполнено</button>
+        </form>
+            {% else %}
+            <span class="done-label">✔ Выполнено</span>
+            {% endif %}
+        </form>
+        </div>
+    {% endfor %}
+{% else %}
+    <div class="card">
+        <p>Нет активных задач 🎉</p>
+    </div>
+{% endif %}
+
+<hr style="margin:40px 0;">
+
+<div style="display:flex;gap:15px;flex-wrap:wrap;">
+    <a class="btn" href="{% url 'calendar' %}">📅 Календарь ТО</a>
+
+    {% if user.is_staff %}
+        <a class="btn" href="{% url 'history' %}">📜 История</a>
+        <a class="btn" href="{% url 'settings' %}">⚙️ Настройки</a>
+    {% endif %}
+</div>
+{% endblock %}
+

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Cyber TO{% endblock %}</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background: radial-gradient(circle at top, #0f2027, #000);
+            color: #00fff7;
+        }
+        a { color: #ff00ff; text-decoration: none; }
+        .container { padding: 30px; }
+
+        .btn {
+            padding: 10px 20px;
+            background: linear-gradient(45deg, #ff00ff, #00fff7);
+            border: none;
+            border-radius: 8px;
+            color: black;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 0 15px #00fff7;
+        }
+
+        .card {
+            background: rgba(0,0,0,0.7);
+            border: 1px solid #00fff7;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 0 20px rgba(0,255,247,0.4);
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            background: black;
+            border: 1px solid #ff00ff;
+            color: #00fff7;
+            border-radius: 6px;
+        }
+    </style>
+</head>
+<body>
+<header style="
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:15px 30px;
+    border-bottom:1px solid #00fff7;
+    box-shadow:0 0 20px rgba(0,255,247,.5);
+">
+    <div style="font-size:22px;font-weight:bold;">
+        No easy coursework
+    </div>
+
+    <div>
+        {% if user.is_authenticated %}
+            <span style="margin-right:15px;">
+                👤 {{ user.username }}
+            </span>
+            <form method="post" action="{% url 'logout' %}" style="display:inline;">
+            {% csrf_token %}
+            <button class="btn" type="submit">Выйти</button>
+    </form>
+            {% endif %}
+    </div>
+</header>
+
+<div class="container">
+    {% block content %}{% endblock %}
+</div>
+</body>
+
+</html>
+
+<style>
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.day-box {
+    border: 1px solid #00ffee;
+    padding: 10px;
+    min-height: 120px;
+    background: #050b10;
+    color: #00ffee;
+}
+
+.today {
+    box-shadow: 0 0 10px #ff00ff;
+    border-color: #ff00ff;
+}
+
+.day-date {
+    font-weight: bold;
+    margin-bottom: 6px;
+}
+
+.task {
+    background: rgba(0,255,255,0.15);
+    margin-bottom: 4px;
+    padding: 4px;
+    font-size: 13px;
+}
+
+.no-task {
+    opacity: 0.3;
+}
+</style>
+
+<style>
+.neon-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.neon-table th, .neon-table td {
+    border: 1px solid #00ffee;
+    padding: 10px;
+    text-align: center;
+}
+
+.ok { color: #00ff99; }
+.bad { color: #ff5555; }
+
+.btn {
+    padding: 6px 10px;
+    border: 1px solid #00ffee;
+    color: #00ffee;
+    text-decoration: none;
+    margin: 2px;
+    display: inline-block;
+}
+
+.back-btn {
+    margin-top: 20px;
+    display: inline-block;
+}
+</style>

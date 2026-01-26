@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block title %}Права доступа{% endblock %}
+
+{% block content %}
+<h1>🔐 Права доступа</h1>
+
+{% for user in users %}
+<div class="card">
+    <h3>{{ user.username }}</h3>
+
+    <form method="post" style="display:flex; gap:10px; align-items:center;">
+        {% csrf_token %}
+        <input type="hidden" name="user_id" value="{{ user.id }}">
+
+        <select name="group_id">
+            <option value="">— без роли —</option>
+            {% for group in groups %}
+                <option value="{{ group.id }}"
+                    {% if group in user.groups.all %}selected{% endif %}>
+                    {{ group.name }}
+                </option>
+            {% endfor %}
+        </select>
+
+        <button class="btn">💾 Сохранить</button>
+    </form>
+
+    <p>
+        Администратор:
+        {% if user.is_superuser %} ✔ {% else %} ✖ {% endif %}
+    </p>
+</div>
+{% endfor %}
+
+{% include 'back_button.html' %}
+{% endblock %}
