@@ -1,0 +1,59 @@
+﻿<Window x:Class="ElectroWorld.LoginWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Авторизация - ElectroWorld" 
+        Height="400" Width="500"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize">
+
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Заголовок -->
+        <TextBlock Grid.Row="0" Grid.ColumnSpan="2" 
+                   Text="Добро пожаловать!" 
+                   FontSize="24" FontWeight="Bold"
+                   HorizontalAlignment="Center" Margin="0,0,0,20"/>
+
+        <!-- Логин -->
+        <TextBlock Grid.Row="1" Grid.Column="0" 
+                   Text="Логин:" VerticalAlignment="Center" FontSize="14"/>
+        <TextBox x:Name="txtLogin" Grid.Row="1" Grid.Column="1" 
+                 Margin="0,5,0,10" FontSize="14"/>
+
+        <!-- Пароль -->
+        <TextBlock Grid.Row="2" Grid.Column="0" 
+                   Text="Пароль:" VerticalAlignment="Center" FontSize="14"/>
+        <PasswordBox x:Name="txtPassword" Grid.Row="2" Grid.Column="1" 
+                     Margin="0,5,0,10" FontSize="14"/>
+
+        <!-- Кнопки -->
+        <Button x:Name="btnLogin" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"
+                Content="Войти" FontSize="16" FontWeight="Bold"
+                Height="40" Margin="0,10" Background="#359A85" Foreground="White"
+                Click="BtnLogin_Click"/>
+
+        <Button x:Name="btnRegister" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2"
+                Content="Зарегистрироваться" FontSize="14"
+                Height="35" Margin="0,5" Background="#19493f" Foreground="White"
+                Click="BtnRegister_Click"/>
+
+        <!-- Сообщение об ошибке -->
+        <TextBlock x:Name="txtError" Grid.Row="5" Grid.ColumnSpan="2"
+                   Text="" Foreground="Red" TextWrapping="Wrap"
+                   HorizontalAlignment="Center" VerticalAlignment="Bottom"
+                   Margin="0,10"/>
+    </Grid>
+</Window>
