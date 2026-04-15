@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "tAGheiOduWk=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Mavus\\Desktop\\Samorukov\\Samorukov.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Mavus\\.nuget\\packages\\stub.system.data.sqlite.core.netstandard\\1.0.119\\stub.system.data.sqlite.core.netstandard.1.0.119.nupkg.sha512",
+    "C:\\Users\\Mavus\\.nuget\\packages\\system.data.sqlite.core\\1.0.119\\system.data.sqlite.core.1.0.119.nupkg.sha512"
+  ],
+  "logs": []
+}
